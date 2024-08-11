@@ -1,6 +1,16 @@
 // Write your JavaScript code here!
 
-window.addEventListener("load", function() {
+const { formSubmission } = require("./scriptHelper");
+
+window.addEventListener("load", function(event) {
+    let form = document.querySelector("form");
+    form.addEventListener("click", function(){
+        document.formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
+        
+    })
+    window.alert("All fields are required");
+    
+    
 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
