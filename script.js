@@ -1,21 +1,27 @@
 // Write your JavaScript code here!//
 
-// const { formSubmission } = require("./scriptHelper");
 
-window.addEventListener("load", function(event) {
+
+window.addEventListener("load", function() {
     console.log("Page is loaded");
-    window.alert("All fields are required");
+    window.setTimeout(function () { alert("All fields are required"); }, 1000);
     let form = document.querySelector("form");
-    let submitButton = document.getElementById("formSubmit");
-    submitButton.addEventListener("click", function(event){
+    // let submitButton = document.getElementById("formSubmit");
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+        const pilotNameInput = document.querySelector("input[name=pilotName]");
+        let copilotNameInput = document.querySelector("input[name=copilotName]");
+        let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
+        let cargoMassInput = document.querySelector("input[name=cargoMass]");
+
+        formSubmission(document, faultyItems, pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput);
         console.log(form);
         event.preventDefault();
-        formSubmission(document, faultyItems, pilot, copilot, fuelLevel, cargoMass);
-        event.preventDefault();
-        if (launchStatus.innerHTML === "Shuttle Not Ready for Launch"){
-            event.preventDefault();
-            alert("Shuttle Not Ready for Launch");
-        }
+    
+        // if (launchStatus.innerHTML === "Shuttle Not Ready for Launch"){
+        //     event.preventDefault();
+        //     alert("Shuttle Not Ready for Launch");
+        // }
         event.preventDefault();
     });
     
