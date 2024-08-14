@@ -16,36 +16,35 @@ require('cross-fetch/polyfill');
                  <img src="">
     */
 //  }
+
+let missionTarget = document.getElementById("missionTarget");
  
  function validateInput(testInput) {
-    if (isNaN(testInput) === true){
+    if (testInput === ""){
+        return "Empty";
+    }
+    else if (isNaN(testInput) === true){
         return "Not a Number";
     }
     else if (isNaN(testInput) === false){
         return "Is a Number";
     }
-    else {
-        return "Empty";
-    }
  }
- 
 
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     const pilotName = document.querySelector("input[name=pilotName]");
     const copilotName = document.querySelector("input[name=copilotName]");
     const fuelLevelL = document.querySelector("input[name=fuelLevel]");
     const cargoMassKg = document.querySelector("input[name=cargoMass]");
-    const faultyItemsList = document.getElementById("faultyItems");
+    let faultyItemsList = document.getElementById("faultyItems");
     let launchStatus = document.getElementById("launchStatus");
     let readyToLaunch = true;
-
+    
     let validatePilotName = validateInput(pilotName.value);
     if (validatePilotName === "Empty"){
-        window.alert("Pilot Name is required");
         readyToLaunch = false;
     }
     else if (validatePilotName === "Is a Number"){
-        window.alert("Pilot Name Invalid");
         readyToLaunch = false;
     }
     else if (validatePilotName === "Not a Number"){
@@ -54,11 +53,11 @@ require('cross-fetch/polyfill');
 
     let validateCopilotName = validateInput(copilotName.value);
     if (validateCopilotName === "Empty"){
-        window.alert("Copilot Name is required");
+        // alert("Copilot Name is required");
         readyToLaunch = false;
     }
     else if (validateCopilotName === "Is a Number"){
-        window.alert("Copilot Name Invalid");
+        // alert("Copilot Name Invalid");
         readyToLaunch = false;
     }
     else if (validateCopilotName === "Not a Number"){
@@ -67,18 +66,19 @@ require('cross-fetch/polyfill');
 
     let validateFuelLevel = validateInput(fuelLevelL.value);
     if (validateFuelLevel === "Empty"){
-        window.alert("Fuel Level is required");
+        // alert("Fuel Level is required");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Not a Number"){
-        window.alert("Fuel Level Invalid");
+        // alert("Fuel Level Invalid");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Is a Number"){
         if (fuelLevelL.value < 10000){
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
-            launchStatus.style.color = "red";
-            faultyItemsList.style.visibility = "visible";
+            // bracket notation?
+            launchStatus.style["color"] = "red";
+            faultyItemsList.style["visibility"] = "visible";
             fuelStatus.innerHTML = `Fuel level too low for launch`;
             readyToLaunch = false;
         }
@@ -89,15 +89,16 @@ require('cross-fetch/polyfill');
 
     let validateCargoMass = validateInput(cargoMassKg.innerHTML);
     if (validateCargoMass === "Empty"){
-        window.alert("Cargo Mass is required");
+        // window.alert("Cargo Mass is required");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Not a Number"){
-        window.alert("Invalid Cargo Mass");
+        // window.alert("Invalid Cargo Mass");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Is a Number"){
         if (cargoMassKg > 10000){
+            // bracket notation?
             faultyItemsList.style.visibility = "visible";
             faultyItemsList.cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
@@ -118,7 +119,7 @@ require('cross-fetch/polyfill');
  async function myFetch() {
      let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
+     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
          });
  
      return planetsReturned;
