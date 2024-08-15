@@ -110,7 +110,7 @@ require('cross-fetch/polyfill');
         if (cargoMass > 10000){
             // bracket notation?
             list.style.visibility = "visible";
-            list.cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
+            cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
             launchStatus.style.color = "red";
             readyToLaunch = false;
@@ -122,21 +122,27 @@ require('cross-fetch/polyfill');
 
     if (readyToLaunch === true){
         launchStatus.style.color = "green";
+        list.style.visibility = "visible";
         launchStatus.innerHTML = `Shuttle is Ready for Launch`;
     }
     // console.log(list.style.visibility);
  }
  
  async function myFetch() {
-     let planetsReturned;
+//      let planetsReturned;
  
-     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-         });
+//      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+//         // response.json().then(function(json){
+//             console.log(json);
+//         // });     
+//     });
  
-     return planetsReturned;
+//      return planetsReturned;
  }
  
  function pickPlanet(planets) {
+//     let planet = planets[Math.floor(Math.random() * (planets.length))];
+//     return planet;
  }
  
 //  module.exports.addDestinationInfo = addDestinationInfo;
