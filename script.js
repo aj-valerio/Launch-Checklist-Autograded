@@ -4,17 +4,19 @@
 
 window.addEventListener("load", function() {
     console.log("Page is loaded");
-    window.setTimeout(function () { alert("All fields are required"); }, 1000);
+    // window.setTimeout(function () { alert("All fields are required"); }, 1000);
     let form = document.querySelector("form");
     // let submitButton = document.getElementById("formSubmit");
     form.addEventListener("submit", function(event){
         event.preventDefault();
-        const pilotNameInput = document.querySelector("input[name=pilotName]");
-        let copilotNameInput = document.querySelector("input[name=copilotName]");
-        let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-        let cargoMassInput = document.querySelector("input[name=cargoMass]");
+        list = document.getElementById("faultyItems");
+        pilot = document.querySelector("input[name=pilotName]");
+        copilot = document.querySelector("input[name=copilotName]");
+        fuelLevel = document.querySelector("input[name=fuelLevel]");
+        cargoMass = document.querySelector("input[name=cargoMass]");
 
-        formSubmission(document, faultyItems, pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput);
+        formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass);
+        // console.log(list.style.visibility);
         event.preventDefault();
     });
     
@@ -26,7 +28,7 @@ window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
-        console.log(listedPlanets);
+        // console.log(listedPlanets); TEMP
     }).then(function () {
         // console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.

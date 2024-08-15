@@ -17,7 +17,7 @@ require('cross-fetch/polyfill');
     */
 //  }
 
-let missionTarget = document.getElementById("missionTarget");
+// let missionTarget = document.getElementById("missionTarget");
  
  function validateInput(testInput) {
     if (testInput === ""){
@@ -32,15 +32,24 @@ let missionTarget = document.getElementById("missionTarget");
  }
 
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
-    const pilotName = document.querySelector("input[name=pilotName]");
-    const copilotName = document.querySelector("input[name=copilotName]");
-    const fuelLevelL = document.querySelector("input[name=fuelLevel]");
-    const cargoMassKg = document.querySelector("input[name=cargoMass]");
-    let faultyItemsList = document.getElementById("faultyItems");
-    let launchStatus = document.getElementById("launchStatus");
+    list = document.getElementById("faultyItems");
+    launchStatus = document.getElementById("launchStatus");
+    pilotStatus = document.getElementById("pilotStatus");
+    copilotStatus = document.getElementById("copilotStatus");
+    fuelStatus = document.getElementById("fuelStatus");
+    cargoStatus = document.getElementById("cargoStatus");
+    pilot = document.getElementById("pilotName").value;
+    copilot = document.querySelector("input[name=copilotName]").value;
+    fuelLevel = document.querySelector("input[name=fuelLevel]").value;
+    cargoMass = document.querySelector("input[name=cargoMass]").value;
     let readyToLaunch = true;
-    
-    let validatePilotName = validateInput(pilotName.value);
+
+    console.log(pilot);
+    console.log(copilot);
+    console.log(fuelLevel);
+    console.log(cargoMass);
+
+    let validatePilotName = validateInput(pilot);
     if (validatePilotName === "Empty"){
         readyToLaunch = false;
     }
@@ -48,10 +57,10 @@ let missionTarget = document.getElementById("missionTarget");
         readyToLaunch = false;
     }
     else if (validatePilotName === "Not a Number"){
-        pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready for launch.`;
+        pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch.`;
     }
 
-    let validateCopilotName = validateInput(copilotName.value);
+    let validateCopilotName = validateInput(copilot);
     if (validateCopilotName === "Empty"){
         // alert("Copilot Name is required");
         readyToLaunch = false;
@@ -61,10 +70,10 @@ let missionTarget = document.getElementById("missionTarget");
         readyToLaunch = false;
     }
     else if (validateCopilotName === "Not a Number"){
-        copilotStatus.innerHTML = `Co-pilot ${copilotName.value} is ready for launch.`;
+        copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch.`;
     } 
 
-    let validateFuelLevel = validateInput(fuelLevelL.value);
+    let validateFuelLevel = validateInput(fuelLevel);
     if (validateFuelLevel === "Empty"){
         // alert("Fuel Level is required");
         readyToLaunch = false;
@@ -74,20 +83,21 @@ let missionTarget = document.getElementById("missionTarget");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Is a Number"){
-        if (fuelLevelL.value < 10000){
+        if (fuelLevel < 10000){
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
             // bracket notation?
-            launchStatus.style["color"] = "red";
-            faultyItemsList.style["visibility"] = "visible";
+            launchStatus.style.color = "red";
+            list.style.visibility = "visible";
+            
             fuelStatus.innerHTML = `Fuel level too low for launch`;
             readyToLaunch = false;
         }
-        else if (fuelLevelL >= 10000){
+        else if (fuelLevel >= 10000){
             fuelStatus.innerHTML = `Fuel level high enough for launch`;
         }
     }
 
-    let validateCargoMass = validateInput(cargoMassKg.innerHTML);
+    let validateCargoMass = validateInput(cargoMass);
     if (validateCargoMass === "Empty"){
         // window.alert("Cargo Mass is required");
         readyToLaunch = false;
@@ -97,16 +107,16 @@ let missionTarget = document.getElementById("missionTarget");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Is a Number"){
-        if (cargoMassKg > 10000){
+        if (cargoMass > 10000){
             // bracket notation?
-            faultyItemsList.style.visibility = "visible";
-            faultyItemsList.cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
+            list.style.visibility = "visible";
+            list.cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
             launchStatus.style.color = "red";
             readyToLaunch = false;
         }
-        else if (cargoMassKg <= 10000){
-            faultyItemsList.cargoStatus.innerHTML = `Cargo mass is low enough for launch`;
+        else if (cargoMass <= 10000){
+            cargoStatus.innerHTML = `Cargo mass is low enough for launch`;
         }
     }
 
@@ -114,6 +124,7 @@ let missionTarget = document.getElementById("missionTarget");
         launchStatus.style.color = "green";
         launchStatus.innerHTML = `Shuttle is Ready for Launch`;
     }
+    // console.log(list.style.visibility);
  }
  
  async function myFetch() {
