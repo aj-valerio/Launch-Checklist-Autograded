@@ -2,11 +2,9 @@
 
 require('cross-fetch/polyfill');
 
-function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
+function addDestinationInfo(document, name, diameter, star, distance, moons, image) {
     let missionTarget = document.getElementById("missionTarget");
         missionTarget.innerHTML = 
-
-    // Here is the HTML formatting for our mission target div.
     
                  `<h2>Mission Destination</h2>
                  <ol>
@@ -16,7 +14,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                      <li>Distance from Earth: ${distance}</li>
                      <li>Number of Moons: ${moons}</li>
                  </ol>
-                 <img src="${imageURL}">`
+                 <img src="${image}">`
     
  }
 
@@ -53,9 +51,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     let validatePilotName = validateInput(pilot);
     if (validatePilotName === "Empty"){
+        // alert("All fields are required");
         readyToLaunch = false;
     }
     else if (validatePilotName === "Is a Number"){
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validatePilotName === "Not a Number"){
@@ -64,11 +64,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     let validateCopilotName = validateInput(copilot);
     if (validateCopilotName === "Empty"){
-        // alert("Copilot Name is required");
+        // alert("All fields are required");
         readyToLaunch = false;
     }
     else if (validateCopilotName === "Is a Number"){
-        // alert("Copilot Name Invalid");
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validateCopilotName === "Not a Number"){
@@ -77,17 +77,16 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     let validateFuelLevel = validateInput(fuelLevel);
     if (validateFuelLevel === "Empty"){
-        // alert("Fuel Level is required");
+        // alert("All fields are required");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Not a Number"){
-        // alert("Fuel Level Invalid");
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Is a Number"){
         if (fuelLevel < 10000){
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
-            // bracket notation?
             launchStatus.style.color = "red";
             list.style.visibility = "visible";
             
@@ -101,16 +100,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     let validateCargoMass = validateInput(cargoMass);
     if (validateCargoMass === "Empty"){
-        // window.alert("Cargo Mass is required");
+        // alert("All fields are required");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Not a Number"){
-        // window.alert("Invalid Cargo Mass");
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Is a Number"){
         if (cargoMass > 10000){
-            // bracket notation?
             list.style.visibility = "visible";
             cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
             launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
@@ -136,16 +134,13 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {   
      return response;
             
-        });   
-        console.log(planetsReturned); 
+        });
+        planetsReturned = planetsReturned.json();
         return planetsReturned; 
     }
  
  function pickPlanet(planets) {
-    // planet = planets[Math.floor(Math.random() * 6)];
-    // why does this not allow me to log an index from the array? The whole array logs correctly 
-    // but I can't seem to use array methods on it
-    planet = planets[0];
+    planet = planets[Math.floor(Math.random() * (planets.length))];
     console.log(planet);
     return planet;
  }

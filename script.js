@@ -6,7 +6,6 @@
 
 window.addEventListener("load", function() {
     console.log("Page is loaded");
-    // window.setTimeout(function () { alert("All fields are required"); }, 1000);
     let form = document.querySelector("form");
     // let submitButton = document.getElementById("formSubmit");
     form.addEventListener("submit", function(event){
@@ -28,13 +27,12 @@ window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
-        console.log(listedPlanets);
+        // console.log(listedPlanets);
     }).then(function () {
-        console.log(listedPlanets);
+        // console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-    // console.log(listedPlanets[0]); --returns undefined. Why can't it select an index?
     let planet = pickPlanet(listedPlanets);
     console.log(planet);
-    addDestinationInfo(document, name, diameter, star, distance, moons, imageURL);
+    addDestinationInfo(document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.image);
     })
 });
