@@ -32,7 +32,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
 
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
-    launchStatus = document.getElementById("launchStatus");
+    h2 = document.getElementById("launchStatus");
     pilotStatus = document.getElementById("pilotStatus");
     copilotStatus = document.getElementById("copilotStatus");
     fuelStatus = document.getElementById("fuelStatus");
@@ -50,6 +50,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
     else if (validatePilotName === "Not a Number"){
         pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+        
     }
 
     let validateCopilotName = validateInput(copilot.value);
@@ -71,20 +72,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Not a Number"){
-        alert("Make sure to enter valid information for each field!");
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validateFuelLevel === "Is a Number"){
         if (fuelLevel.value < 10000){
-            launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
-            launchStatus.style.color = "red";
+            h2.innerHTML = "Shuttle Not Ready for Launch";
+            h2.style.color = "red";
             list.style.visibility = "visible";
-            
-            fuelStatus.innerHTML = `Fuel level too low for launch`;
             readyToLaunch = false;
+            fuelStatus.innerHTML = "Fuel level too low for launch";
         }
         else if (fuelLevel.value >= 10000){
-            fuelStatus.innerHTML = `Fuel level high enough for launch`;
+            fuelStatus.innerHTML = "Fuel level high enough for launch";
         }
     }
 
@@ -94,27 +94,28 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Not a Number"){
-        alert("Make sure to enter valid information for each field!");
+        // alert("Make sure to enter valid information for each field!");
         readyToLaunch = false;
     }
     else if (validateCargoMass === "Is a Number"){
         if (cargoMass.value > 10000){
             list.style.visibility = "visible";
-            cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
-            launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
-            launchStatus.style.color = "red";
+            cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+            h2.innerHTML = "Shuttle Not Ready for Launch";
+            h2.style.color = "red";
             readyToLaunch = false;
         }
         else if (cargoMass.value <= 10000){
-            cargoStatus.innerHTML = `Cargo mass low enough for launch`;
+            cargoStatus.innerHTML = "Cargo mass low enough for launch";
         }
     }
 
     if (readyToLaunch === true){
-        launchStatus.style.color = "green";
+        h2.style.color = "green";
         list.style.visibility = "visible";
-        launchStatus.innerHTML = `Shuttle is Ready for Launch`;
+        h2.innerHTML = "Shuttle is Ready for Launch";
     }
+    console.log(list.style.visibility);
  }
  
  async function myFetch() {

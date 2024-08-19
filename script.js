@@ -8,7 +8,7 @@ window.addEventListener("load", function() {
     console.log("Page is loaded");
     let form = document.querySelector("form");
     form.addEventListener("submit", function(event){
-        event.preventDefault();
+        // event.preventDefault();
         list = document.getElementById("faultyItems");
         pilot = document.querySelector("input[name=pilotName]");
         copilot = document.querySelector("input[name=copilotName]");
