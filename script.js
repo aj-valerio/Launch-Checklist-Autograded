@@ -7,7 +7,6 @@
 window.addEventListener("load", function() {
     console.log("Page is loaded");
     let form = document.querySelector("form");
-    // let submitButton = document.getElementById("formSubmit");
     form.addEventListener("submit", function(event){
         event.preventDefault();
         list = document.getElementById("faultyItems");
@@ -17,7 +16,6 @@ window.addEventListener("load", function() {
         cargoMass = document.querySelector("input[name=cargoMass]");
 
         formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass);
-        // console.log(list.style.visibility);
         event.preventDefault();
     });
     
