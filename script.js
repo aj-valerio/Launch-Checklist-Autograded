@@ -9,12 +9,9 @@ window.addEventListener("load", function() {
     let form = document.querySelector("form");
     form.addEventListener("submit", function(event){
         event.preventDefault();
-        // have one variable for the query selector and one for the value
         let list = document.getElementById("faultyItems");
         let pilotNameField = document.querySelector("input[name=pilotName]");
-        // console.log(pilotNameField.value);
         let pilot = pilotNameField.value;
-        // console.log(pilot);
         let copilotNameField = document.querySelector("input[name=copilotName]");
         let copilot = copilotNameField.value;
         let fuelLevelField = document.querySelector("input[name=fuelLevel]");
